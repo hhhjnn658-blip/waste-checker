@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>废物自检器</title>
+</head>
+<body>
+    <h1>今天干了什么？</h1>
+    <input type="text" id="input" placeholder="输入你今天的成果">
+    <button onclick="check()">检查</button>
+    <p id="result"></p>
+    <script>
+    function check() {
+        var val = document.getElementById('input').value;
+        var result = document.getElementById('result');
+        
+        if(val.length == 0) {
+            result.innerText = "空白。你确实没产出。滚回去干活。";
+            return;
+        }
+        
+        val = val.toLowerCase();
+        
+        if(val.includes("游戏") || val.includes("王者") || val.includes("刷")) {
+            result.innerText = "打游戏？你的对手在写代码，你在给腾讯送钱。";
+        } else if(val.includes("视频") || val.includes("b站") || val.includes("抖音")) {
+            result.innerText = "看视频5小时，你是来当观众的还是来当导演的？";
+        } else if(val.includes("书") || val.includes("教程") || val.includes("学")) {
+            result.innerText = "又看了一天教程？产出呢？代码呢？";
+        } else if(val.includes("代码") || val.includes("写") || val.includes("做")) {
+            result.innerText = "至少动手了。但有没有发布？没发布等于零。";
+        } else {
+            result.innerText = "看不懂你在干嘛。建议直接输入'废物'自检。";
+        }
+    }
+</script>
+</body>
+</html>
