@@ -2,36 +2,79 @@
 <html>
 <head>
     <title>废物自检器</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: "Microsoft YaHei", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: #2d2d2d;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 320px;
+        }
+        h1 { margin: 0 0 20px 0; font-size: 24px; }
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        select { background: #404040; color: #fff; }
+        button {
+            background: #e74c3c;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background: #c0392b; }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #e74c3c;
+            min-height: 60px;
+        }
+    </style>
 </head>
 <body>
-    <h1>今天干了什么？</h1>
-    <input type="text" id="input" placeholder="输入你今天的成果">
-    <button onclick="check()">检查</button>
-    <p id="result"></p>
+    <div class="box">
+        <h1>今天干了什么？</h1>
+        <select id="activity">
+            <option value="">选一个</option>
+            <option value="game">打游戏</option>
+            <option value="video">刷视频</option>
+            <option value="tutorial">看教程</option>
+            <option value="code">写代码</option>
+            <option value="daze">发呆</option>
+            <option value="sleep">睡觉</option>
+        </select>
+        <button onclick="check()">检查</button>
+        <p id="result"></p>
+    </div>
     <script>
-    function check() {
-        var val = document.getElementById('input').value;
-        var result = document.getElementById('result');
-        
-        if(val.length == 0) {
-            result.innerText = "空白。你确实没产出。滚回去干活。";
-            return;
+        function check() {
+            var v = document.getElementById('activity').value;
+            var r = document.getElementById('result');
+            var msgs = {
+                game: "打游戏？你的对手在写代码，你在给腾讯送钱。",
+                video: "刷视频5小时，你是来当观众的还是来当导演的？",
+                tutorial: "又看了一天教程？产出呢？代码呢？",
+                code: "至少动手了。但有没有发布？没发布等于零。",
+                daze: "发呆？你的脑细胞在集体罢工。",
+                sleep: "睡了一天？你是来体验人生的还是来浪费人生的？"
+            };
+            r.innerText = v ? msgs[v] : "选一个。别逃避。";
         }
-        
-        val = val.toLowerCase();
-        
-        if(val.includes("游戏") || val.includes("王者") || val.includes("刷")) {
-            result.innerText = "打游戏？你的对手在写代码，你在给腾讯送钱。";
-        } else if(val.includes("视频") || val.includes("b站") || val.includes("抖音")) {
-            result.innerText = "看视频5小时，你是来当观众的还是来当导演的？";
-        } else if(val.includes("书") || val.includes("教程") || val.includes("学")) {
-            result.innerText = "又看了一天教程？产出呢？代码呢？";
-        } else if(val.includes("代码") || val.includes("写") || val.includes("做")) {
-            result.innerText = "至少动手了。但有没有发布？没发布等于零。";
-        } else {
-            result.innerText = "看不懂你在干嘛。建议直接输入'废物'自检。";
-        }
-    }
-</script>
+    </script>
 </body>
 </html>
